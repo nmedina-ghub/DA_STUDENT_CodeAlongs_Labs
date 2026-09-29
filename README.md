@@ -1,4 +1,5 @@
 # Data Analytics Code-Alongs & Labs
+HELPPPPPPPPPPPPP
 
 This is your working repo for code-alongs (from lecture) and labs
 (in-class practice) — starter files you actually type into, not a reference
