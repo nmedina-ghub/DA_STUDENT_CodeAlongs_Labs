@@ -43,17 +43,17 @@ SUBMIT
 ############################################################################
 
 # 1. What does one row represent?
-# Your answer:
+# Your answer: volunteer, day, hours
 #
 #
 
 # 2. Which fields hold numbers, and which hold text?
-# Your answer:
+# Your answer: columns 1-2 hold text, column 3 holds numbers
 #
 #
 
 # 3. What already looks wrong, missing or inconsistent?
-# Your answer:
+# Your answer: the amount of hours each volunteer worked are very inconsistent, also the shifts each volunteer had, and the days they all worked
 #
 #
 
@@ -84,7 +84,7 @@ SUBMIT
 # If the two differ, say which line you mis-read. Do not edit the
 # prediction.
 
-with open("data/volunteer_shifts.txt") as f:
+with open("volunteer_shifts.txt") as f:
     shifts = [line for line in f.read().splitlines()
               if line and not line.startswith("#")]
 
@@ -99,7 +99,8 @@ for shift in shifts:
 
 print("shifts of 4+ hours:", long_shifts)
 
-# Your answer:
+# Your answer: 
+# 1.
 #
 #
 
@@ -212,8 +213,8 @@ print(len(volunteers), "volunteers x", len(days), "days =", checks)
 #
 # Both loops run clean, with no traceback from either. Only one of them is
 # right.
-
-buggy_seen = 0
+"""
+bug`gy_seen = 0
 for i in range(len(shifts) - 1):
     buggy_seen = buggy_seen + 1
 
@@ -229,7 +230,7 @@ print("fixed loop visited: ", fixed_seen)
 # TODO: print the one row the buggy loop never reached. Reach into the
 #       list by position; do not retype the row by hand.
 print("the row it never saw:", None)
-
+"""
 # ----- Share Out: Day 2 -----
 # Last 15 minutes, back together as a class. Bring:
 #
