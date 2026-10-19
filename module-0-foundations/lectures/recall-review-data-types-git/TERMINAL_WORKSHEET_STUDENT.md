@@ -21,6 +21,21 @@ No new material today - just you, testing your own memory. You'll work through t
 *Complete the TODOs below as you work through this step.*
 
 ```bash
+mkdir financial_analysis
+ls
+cd financial_analysis
+mv financcial_analysis ~/documents/Marcy/
+cd financial_analysis 
+touch README.md
+git init
+echo "This is recall practice. " > README.md
+git add README.md
+git status
+git commit -m "Created initial repo. Added README. "
+git remote add origin 
+git push -u origin main
+git log --oneline
+
 # TODO: from memory, no notes - initialize a repo, create a file,
 # stage it, and check status
 ```

@@ -34,6 +34,7 @@ $ rm -rf old_data/
 *Complete the TODOs below as you work through this step.*
 
 ```bash
+wc -l energy_sample.csv
 # TODO: count the file's rows to double-check the AI's claim
 ```
 
