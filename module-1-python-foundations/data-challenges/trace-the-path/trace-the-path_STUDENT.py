@@ -69,6 +69,7 @@ SUBMIT
 #    print what comes back. Under the "# Your answer:" line below, type 2-3
 #    bullets: what .split() hands back, what the "," controls, and where you
 #    found that out.
+# "5"
 # 2. Predict the count by reading the file, not the code. You opened
 #    data/volunteer_shifts.txt above and it holds 12 shift rows. Read the
 #    third field on each row and count the rows where it is 4 or more. Write
@@ -100,7 +101,8 @@ for shift in shifts:
 print("shifts of 4+ hours:", long_shifts)
 
 # Your answer: 
-# 1.
+# 1. After researching .split(","), it hands back the list of strings used in its process. The "," acts as a seperator/delimiter. 
+# I found this out asking AI, and promting the context of the situation, so the code in this file and the question asked.
 #
 #
 
