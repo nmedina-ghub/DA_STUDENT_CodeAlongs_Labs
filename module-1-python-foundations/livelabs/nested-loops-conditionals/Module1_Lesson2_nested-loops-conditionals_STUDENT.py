@@ -34,13 +34,27 @@ fill it in before you run the file again.
 print('----- 1. Nested Loop, Live -----')
 # TODO: write a nested loop that prints every (row, col)
 # pair for row in range(2) and col in range(3)
+for row in range(2):
+    for col in range(3):
+        print(row,col)
 
 # PREDICT before you run: Change the Nested Loop code to range(3) on the
 #                         outside and range(2) on the inside. How many lines
 #                         print?
 # Your answer:
-#
-#
+# 0 0
+# 0 1
+# 1 0
+# 1 1
+# 2 0
+# 2 1
+# Prediction:
+# 0 1
+# 1 2
+# 2 0
+# 3 0
+# 0 0
+# 0 0
 #
 # DISCUSS: With range(3) outside and range(2) inside, a classmate's version
 #          prints only 3 lines instead of 6. What's the most likely cause?
@@ -56,7 +70,14 @@ print('----- 2. Nested Conditional, Live -----')
 # TODO: check operation first; if it's "ADD", nest a second
 # check confirming quantity is greater than 0
 operation = "ADD"
-quantity = -5
+quantity = 5
+
+#If the operation == "ADD" and if the quantity > 0 = valid add, invalid quantity
+if operation == "ADD":
+        if quantity > 0:
+                print("valid add")
+        else: 
+                print("invalid quantity")
 
 # DISCUSS: Suppose the inner quantity check in the Nested Conditional code
 #          never seems to run. What should you trace first? Try it: set
@@ -71,9 +92,20 @@ quantity = -5
 # quantity, or is a remove.
 print('----- 3. Putting It Together: Loop + Nested Conditional -----')
 # TODO: loop over transactions; for each line, split it into
-# operation and amount, then nest the ADD/quantity check
+# operation and quantity, then nest the ADD/quantity check
 # from the nested-conditional step inside the loop
 transactions = ["ADD 10", "REMOVE 3", "ADD -5"]
+
+for item in transactions:
+        operation,quantity = item.split()
+        quantity = int(quantity)
+        if operation == "ADD":
+                if quantity > 0:
+                        print(item, "- valid")
+                else:
+                        print(item, "- invalid quantity")
+        elif operation == "REMOVE":
+                print(item, "- processing remove")
 
 # PREDICT before you run: In the Putting It Together code, which check flags
 #                         "ADD -5" as invalid: operation == "ADD", amount > 0,
