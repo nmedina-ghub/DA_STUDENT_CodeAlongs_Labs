@@ -85,15 +85,20 @@ with open("data/rec_center_signups.txt") as f:
                if line and not line.startswith("#")]
 
 def total_sessions(records):
-    # TODO: add up the sessions column across every record in `records`
-    for members in signups:
-        members.split(",")
-        print(members)
-    # TODO: hand the total back to whoever called this. Do not print it.
-    pass
+    
+    total = 0
+    for record in records:
+        fields = record.split(",")
+        sessions = int(fields[2].strip())
+        total += sessions
+    return total
 
 swim_only = []
-# TODO: fill swim_only with just the Swim records
+
+for record in signups:
+        fields = record.split(",")
+        if fields[1] == "Swim":
+            swim_only = swim_only + [record]
 
 print("every class:", total_sessions(signups))
 print("swim only:  ", total_sessions(swim_only))
