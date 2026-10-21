@@ -43,17 +43,17 @@ SUBMIT
 ############################################################################
 
 # 1. What does one row represent?
-# Your answer:
+# Your answer: member,class_name,sessions
 #
 #
 
 # 2. Which fields hold numbers, and which hold text?
-# Your answer:
+# Your answer: columns 1-2 hold text, column 3 holds numbers
 #
 #
 
 # 3. What already looks wrong, missing or inconsistent?
-# Your answer:
+# Your answer: gwen and rafi only have 2 sets of data, every other member has 3 this is inconsistent, aswell as the session types each student has some students have the same sessions and others have different classes entirely.
 #
 #
 
@@ -69,6 +69,8 @@ SUBMIT
 #    class: add the third field down all 13 records. Total sessions for Swim
 #    only: add that same field, but only on the records whose class is Swim.
 #    Write both in a comment before you run anything.
+# Prediction: Third field down all 13 records: 45
+#             Total sessions for swim: 4
 # 2. Write total_sessions(records) so it adds up the sessions column across
 #    every record in records and hands the total back with return, not
 #    print.
@@ -84,6 +86,9 @@ with open("data/rec_center_signups.txt") as f:
 
 def total_sessions(records):
     # TODO: add up the sessions column across every record in `records`
+    for members in signups:
+        members.split(",")
+        print(members)
     # TODO: hand the total back to whoever called this. Do not print it.
     pass
 
@@ -228,6 +233,7 @@ last_member = "nobody yet"
 last_seen = "nobody yet"
 
 def log_signup_broken(record):
+    global last_seen
     # Leave this body exactly as written. It is supposed to raise.
     print("previous:", last_seen)
     last_seen = record.split(",")[0]
