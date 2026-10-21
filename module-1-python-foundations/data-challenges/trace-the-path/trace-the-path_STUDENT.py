@@ -126,12 +126,10 @@ print("shifts of 4+ hours:", long_shifts)
 total = 0
 for shift in shifts:
     volunteer, day, hours = shift.split(",")
-    # TODO: add this shift's hours onto the running total. Mind the
-    #       type: everything that came out of that split is a string.
-    total = None
-    # TODO: print one line per pass: the day, the volunteer, and the
-    #       total so far. This printed line IS the tracing tool.
-    print(day, volunteer, "| running total:", None)
+    
+    total = total = total + float(hours)
+
+    print(day, volunteer, "| running total:", total)
 
 print("total hours logged this week:", total)
 
@@ -152,8 +150,10 @@ print("total hours logged this week:", total)
 # Be ready to answer "why did you do it that way?"
 
 # Your notes for the share out:
-#
-#
+# My first prediction was very wrong im not sure why. My second prediction was off by one.
+# I think I misunderstood the first task, and the second one I miscounted by one.
+# Nothing really turned out different than I assumed besides the first question which I didnt understand.
+# I traced it just by counting it, but using a line per pass is more efficient and would be used on 430 rows.
 
 ############################################################################
 #  DAY 2
@@ -167,6 +167,7 @@ print("total hours logged this week:", total)
 #    distinct volunteer names in the file, count the distinct weekdays, and
 #    multiply the two. Write it in a comment as <volunteers> x <days> =
 #    <cells> before you write or run anything.
+# <4> x <5> = <20>
 # 2. Collect the distinct volunteers in the first if TODO: one entry per
 #    volunteer, no repeats.
 # 3. Collect the distinct weekdays in the second if TODO, the same way.
@@ -181,17 +182,17 @@ volunteers = []
 days = []
 for shift in shifts:
     volunteer, day, hours = shift.split(",")
-    # TODO: only append a volunteer this list does not already have.
-    if None:
+   
+    if volunteer not in volunteers:
         volunteers.append(volunteer)
-    # TODO: the same test again, for the day.
-    if None:
+    
+    if day not in days:
         days.append(day)
 
 checks = 0
 for volunteer in volunteers:
-    # TODO: the inner loop. One pass per weekday, for each volunteer.
-    for day in None:
+    
+    for day in days:
         checks = checks + 1
 
 print(len(volunteers), "volunteers x", len(days), "days =", checks)
@@ -205,6 +206,9 @@ print(len(volunteers), "volunteers x", len(days), "days =", checks)
 #    1) and work out the rule: what is the first value of i, and what is the
 #    last? Then write two things in a comment: how many rows the buggy loop
 #    visits, and which row it never reaches.
+# Prediction: first value of i = 0
+#             last value of i = len(shifts) - 1
+# The buggy loop visits row 1, and never reaches the last row.
 # 2. Write the loop header that visits every row. Only the range changes;
 #    the body below it is already right.
 # 3. Print the row the broken loop never reached, reaching into shifts by
@@ -220,17 +224,15 @@ for i in range(len(shifts) - 1):
     buggy_seen = buggy_seen + 1
 
 fixed_seen = 0
-# TODO: write the loop header that visits EVERY row, not all but one.
-#       The body below is already correct. Only the range changes.
-for i in None:
+
+for i in range:
     fixed_seen = fixed_seen + 1
 
 print("rows in the file:   ", len(shifts))
 print("buggy loop visited: ", buggy_seen)
 print("fixed loop visited: ", fixed_seen)
-# TODO: print the one row the buggy loop never reached. Reach into the
-#       list by position; do not retype the row by hand.
-print("the row it never saw:", None)
+
+print("the row it never saw:", shifts[-1])
 """
 # ----- Share Out: Day 2 -----
 # Last 15 minutes, back together as a class. Bring:
@@ -251,5 +253,7 @@ print("the row it never saw:", None)
 # Be ready to answer "why did you do it that way?"
 
 # Your notes for the share out:
-#
-#
+# <4> x <5> = <20> I predicted it correctly. The code counted just as I did.
+# I found the off-by-one by reading the range. In a file that was too long I would do the same.
+# I didnt use much AI but after checking with it, we followed the same logic. It didnt give me a source but it explained the breakdown and what to observe in the code.
+# I would finish this entire data challenge on the first day, because it is very self explanatory more predictions and analysis and less work.
