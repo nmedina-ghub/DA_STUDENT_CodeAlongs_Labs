@@ -92,18 +92,15 @@ with open("volunteer_shifts.txt") as f:
 long_shifts = 0
 for shift in shifts:
     hours = int(shift.split(",")[2])
-    # TODO: write the test for a long shift. The coordinator counts a
-    #       shift of 4 hours or more.
-    if None:
-        # TODO: this is the counting line. Move long_shifts on by one.
-        long_shifts = None
+    if hours >= 4:
+        long_shifts += 1
 
 print("shifts of 4+ hours:", long_shifts)
 
 # Your answer: 
 # 1. After researching .split(","), it hands back the list of strings used in its process. The "," acts as a seperator/delimiter. 
 # I found this out asking AI, and promting the context of the situation, so the code in this file and the question asked.
-#
+# My results differ from my prediction and im not sure why. Either I entered the wrong code, or im misunderstanding the question.
 #
 
 # ===== Step 2: Total the Week's Hours, Printing the Running Total Each Pass =====
@@ -114,6 +111,8 @@ print("shifts of 4+ hours:", long_shifts)
 #    The week's total hours: add the third field down all 12 rows. The
 #    number of lines that will print: the loop prints once per row it
 #    visits, so count the rows.
+# Prediction: Weeks total hours: 38 
+#             Rows: 12
 # 2. Add this shift's hours onto the running total in the first TODO.
 #    Everything that came out of shift.split(",") is a string, so something
 #    has to convert it.
