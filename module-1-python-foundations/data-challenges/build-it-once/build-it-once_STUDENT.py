@@ -109,6 +109,8 @@ print("swim only:  ", total_sessions(swim_only))
 #
 # 1. Predict both returned: counts in a comment, reading the third field
 #    down the file: once for 4 or more, once for 2 or more.
+#    Prediction: 4 or more: 7
+#                2 or more: 11
 # 2. Write count_long_bookings(records, minimum) so it counts the records
 #    whose sessions number is minimum or more, and returns that count.
 # 3. Write show_long_bookings(records, minimum) so it prints a sentence with
@@ -124,13 +126,22 @@ print("swim only:  ", total_sessions(swim_only))
 # other only puts something on the screen.
 
 def count_long_bookings(records, minimum):
-    # TODO: count the records whose sessions number is `minimum` or more
-    # TODO: return the count
-    pass
+
+    count = 0
+    for record in records:
+        split_record = record.split(",")
+        if int(split_record[2]) >= minimum:
+            count = count + 1
+    return count
+
 
 def show_long_bookings(records, minimum):
-    # TODO: print a sentence with the same count in it. Only print.
-    pass
+
+    count = 0
+    for record in records:
+        split_record = record.split(",")
+        if int(split_record[2]) >= minimum:
+            count = count + 1
 
 print("returned:", count_long_bookings(signups, 4))
 print("returned:", count_long_bookings(signups, 2))
