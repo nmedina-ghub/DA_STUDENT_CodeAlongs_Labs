@@ -165,8 +165,10 @@ print("what show_long_bookings handed back:", handed_back)
 # Be ready to answer "why did you do it that way?"
 
 # Your notes for the share out:
-#
-#
+# Our two totals match as shown in the files
+# The specific thing that got easier was simpliyfing a long list of code, into one list of code
+# show_long_bookings handed back "none" because we didnt return it with print, this tells me when using return it actually goes through the function in the background, where as print just shows results
+# the lines with def, lines 128 and 137 name the parameter, the arguments values are minimum and records
 
 ############################################################################
 #  DAY 2
