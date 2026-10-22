@@ -134,14 +134,10 @@ def count_long_bookings(records, minimum):
             count = count + 1
     return count
 
-
 def show_long_bookings(records, minimum):
+    long_bookings_total = count_long_bookings(records, minimum)
+    print(long_bookings_total, 'booked sessions have', minimum, 'or more sessions')
 
-    count = 0
-    for record in records:
-        split_record = record.split(",")
-        if int(split_record[2]) >= minimum:
-            count = count + 1
 
 print("returned:", count_long_bookings(signups, 4))
 print("returned:", count_long_bookings(signups, 2))
@@ -149,9 +145,9 @@ print("returned:", count_long_bookings(signups, 2))
 handed_back = show_long_bookings(signups, 4)
 print("what show_long_bookings handed back:", handed_back)
 
-# Your answer:
-#
-#
+# Your answer: handed_back holds the values that are returned, in this case we didnt return and it stays "none"
+# the parameters which names are minimum are lines 128 and line 137
+# 4 and 2 values represent minimum and records
 
 # ----- Share Out: Day 1 -----
 # Last 15 minutes, back together as a class. Bring:
