@@ -183,6 +183,8 @@ print("what show_long_bookings handed back:", handed_back)
 #    Day 1's second step. All you are predicting here is which of those two
 #    numbers each of the two identical-looking calls prints. Write both in a
 #    comment, and write why.
+# Prediction: 4 and more: 7
+#             2 and more: 11
 # 2. Write count_reaching_outside(records) so it counts the same thing
 #    count_long_bookings does, but takes no minimum parameter. It reads
 #    sessions_cutoff from outside the function instead.
@@ -193,20 +195,34 @@ print("what show_long_bookings handed back:", handed_back)
 #
 # Both versions run clean. Decide which of the two you would trust in a file
 # you did not write, and say what in the call line told you.
+# I would trust the first one more because it has cleaner code, and shows up as "cutoff 4 gives 7" instead of a flat number 7.
+# Call line: cutoff 4 gives 7
+#            7
 
 sessions_cutoff = 4
 
 def count_reaching_outside(records):
-    # TODO: same count as count_long_bookings, but take NO minimum
-    # parameter. Read sessions_cutoff from outside the function instead.
-    pass
+    count = 0
+    for record in records:
+            split_record = record.split(",")
+            if int(split_record[2]) >= sessions_cutoff:
+                count = count + 1
+    return count
+
 
 print("cutoff", sessions_cutoff, "gives", count_reaching_outside(signups))
 
 sessions_cutoff = 2
 
-# TODO: call count_reaching_outside(signups) again, unchanged, and print it
-# TODO: print count_long_bookings(signups, 4) underneath for comparison
+def count_reaching_outside(records):
+    count = 0
+    for record in records:
+            split_record = record.split(",")
+            if int(split_record[2]) >= sessions_cutoff:
+                count = count + 1
+    return count
+
+print count_long_bookings(signups, 4)
 
 # ===== Step 4: Pass the Last Member In and Out, Then Trigger an UnboundLocalError =====
 # The coordinator wants each sign-up printed next to the one before it. The
