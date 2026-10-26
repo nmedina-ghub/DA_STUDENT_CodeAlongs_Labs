@@ -222,7 +222,7 @@ def count_reaching_outside(records):
                 count = count + 1
     return count
 
-print count_long_bookings(signups, 4)
+print (count_long_bookings(signups, 4))
 
 # ===== Step 4: Pass the Last Member In and Out, Then Trigger an UnboundLocalError =====
 # The coordinator wants each sign-up printed next to the one before it. The
