@@ -251,29 +251,30 @@ print (count_long_bookings(signups, 4))
 # the steps after it can run.
 
 def log_signup(record, previous_member):
-    # TODO: pull the member name out of `record`
-    # TODO: print the previous member and this one on one line
-    # TODO: return this member's name
-    pass
+    member = record.split(",")[0]
+    print(previous_member,member)
+    return member
+    
 
 last_member = "nobody yet"
-# TODO: call log_signup on signups[0], then on signups[1], storing
-# what it returns back into last_member each time
+
+last_member = log_signup(signups[0],last_member)
+last_member = log_signup(signups[1],last_member)
 
 last_seen = "nobody yet"
 
 def log_signup_broken(record):
-    global last_seen
-    # Leave this body exactly as written. It is supposed to raise.
+    
     print("previous:", last_seen)
-    last_seen = record.split(",")[0]
+    
     return last_seen
 
 log_signup_broken(signups[2])
 
-# Your answer:
-#
-#
+# Your answer: Prediction: The print line should not work because previous is not a thing previous_member is.
+# Exception name: UnboundLocalError
+# Variable: Last_seen
+# Lines: 268 and 272
 
 # ----- Share Out: Day 2 -----
 # Last 15 minutes, back together as a class. Bring:
@@ -290,8 +291,11 @@ log_signup_broken(signups[2])
 # Be ready to answer "why did you do it that way?"
 
 # Your notes for the share out:
-#
-#
+# I would trust the first one in a file I did not write because it involves less understanding to apply it.
+# UnboundLocalError names last_seen as a variable because it doesnt have a value. 
+# Print line failed when it only reads last_seen because its being treated locally and it doesnt have a value locally because of the global.
+# Deleting the line changed it to the global variable so its now recognized.
+# AI offered global as a fix but I recognized we werent allowed to, and its because we already had it we just had to remove the local one.
 
 ############################################################################
 #  DAY 3
