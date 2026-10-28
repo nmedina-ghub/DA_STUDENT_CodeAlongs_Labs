@@ -368,11 +368,22 @@ print("Gwen", total_for(signups, "Gwen"))
 # No new functions. Call the ones you already have, on inputs nobody
 # asked for, and write a verdict beside each printed result.
 
-# TODO: an empty list
-# TODO: a list holding exactly one record
-# TODO: a member name that is not in the file at all
-# TODO: a name that differs from a real member's only by capitalization
-# TODO: then: do the per-member totals add up to the whole-file total?
+print(total_for([], "Nia"))
+# Right
+print(total_for(["Nia,Yoga,4"], "Nia"))
+# Right
+print(total_for(signups, "Jamie"))
+# Just a number that didnt crash
+print(total_for(signups, "nia"))
+# Just a number that didnt crash
+print(signups_for([], "Nia"))
+# Right
+
+grand_total = 0
+for member in ["Nia", "Omar", "Tess", "Rafi", "Gwen"]:
+    grand_total += total_for(signups, member)
+
+print("sum of members:", grand_total, "whole file:", total_sessions(signups))
 
 # ----- Share Out: Day 3 -----
 # Last 15 minutes, back together as a class. Bring:
@@ -392,5 +403,11 @@ print("Gwen", total_for(signups, "Gwen"))
 # Be ready to answer "why did you do it that way?"
 
 # Your notes for the share out:
-#
-#
+# The strangest result was Nia at 0 because Nia has 12 sessions and the function said 0. This is quiet because 0 appears to be normal but it is wrong.
+# I would make total_for return something that isnt a number, a message etc when the name matches no records.
+# It all added up they both matched 45. I would check it with code by adding up member totals and then comparing it to the whole file total.
+# If the numbers dont match I know something is missing.
+# sessions_in: pulls sessions numbers out of one record, because it was seperate I could test with it and reuse it.
+# signups_for: pulls out only one members records from the whole list, and it was used in a similar fashion to session_in.
+# total_for: adds up one members sessions and hands the work to the other two functions, I used it to combine them.
+# If I could do things differently I would have asked AI to better explain some questions because my predictions were a bit off because I was misunderstanding them.
