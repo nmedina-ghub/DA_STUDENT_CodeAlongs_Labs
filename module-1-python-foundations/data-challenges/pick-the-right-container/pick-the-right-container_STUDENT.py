@@ -15,12 +15,17 @@ taps = rows[1:]
 # ===== Day 1 =====
 
 # Step 1: Write `scan_for()` and Count Its Comparisons for Three Tap IDs
+
 def scan_for(tap_id, records):
-    # TODO: assign `comparisons` to 0
-    # TODO: loop over `records`; add 1 to `comparisons` for every row
-    # TODO: inside the loop, return `comparisons` when row[0] == tap_id
-    # TODO: after the loop, return `comparisons`
-    pass
+    comparisons = 0
+
+    for row in records:
+        comparisons += 1
+
+        if row[0] == tap_id:
+            return comparisons
+
+    return comparisons
 
 
 print("columns:", header)
@@ -29,58 +34,102 @@ print("comparisons to find T001:", scan_for("T001", taps))
 print("comparisons to find T040:", scan_for("T040", taps))
 print("comparisons to find T999:", scan_for("T999", taps))
 
-# Step 1, answer 1:
+# Step 1, answer 1: A linear search checks each record one at a time until it finds the matching tap ID.
 #
-# Step 1, answer 2:
-#
-
+# Step 1, answer 2: If the ID is not found, Python checks every row in the dataset.
+#\
 
 # Step 2: Print Scan Cost at 5 to 40 Rows, Then Count a Nested Pair Loop
 for size in [5, 10, 20, 40]:
     worst = scan_for("T999", taps[:size])
-    # TODO: print "rows:", `size`, "| worst-case comparisons:", `worst`
-# TODO: assign `pairs` to 0; loop over `taps` with a loop over `taps` inside
-# TODO: add 1 to `pairs` in the inner loop
-# TODO: print len(taps) and `pairs`
-# TODO: assign `big` to len(taps) * 10
-# TODO: print the scan's worst case and the pair loop's count on `big` rows
+    print("rows:", size, "| worst-case comparisons:", worst)
+    
+pairs = 0
 
-# Step 2, answer 1:
+for row in taps:
+    for other_row in taps:
+        pairs += 1
+
+print("rows:", len(taps), "| pair comparisons:", pairs)
+
+big = len(taps) * 10
+
+print("scan comparisons on", big, "rows:", big)
+print("pair comparisons on", big, "rows:", big * big)
+
+# Step 2, answer 1: A linear search has O(n) time complexity because the number of
+# comparisons increases in proportion to the number of rows.
 #
-# Step 2, answer 2:
-#
-
-
-# ===== Day 2 =====
+# Step 2, answer 2:  A nested loop has O(n²) time complexity because each row is
+# compared against every other row. The number of comparisons
+# increases much faster as the dataset grows.
 
 # Step 3: Count Taps Per Card With Two Parallel Lists, and Their Comparisons
-# TODO: assign `card_ids` to an empty list (each card, first-seen order)
-# TODO: assign `tap_counts` to an empty list (the count for card_ids[i])
-# TODO: assign `comparisons` to 0
-# TODO: loop over `taps`; assign `card` to row[1] and `found` to False
-# TODO: inside it, loop over range(len(card_ids)); add 1 to `comparisons`
-# TODO: if card_ids[i] == card, add 1 to tap_counts[i], set found, break
-# TODO: after the inner loop, if not found, append `card` and 1 to the lists
+
+card_ids = []
+tap_counts = []
+comparisons = 0
+
+for row in taps:
+    card = row[1]
+    found = False
+
+    for i in range(len(card_ids)):
+        comparisons += 1
+
+        if card_ids[i] == card:
+            tap_counts[i] += 1
+            found = True
+            break
+
+    if not found:
+        card_ids.append(card)
+        tap_counts.append(1)
 
 busiest = tap_counts.index(max(tap_counts))
+
 print("distinct cards:", len(card_ids))
 print("comparisons the two parallel lists needed:", comparisons)
 print("busiest card:", card_ids[busiest], "with", max(tap_counts), "taps")
 
-# Step 3, answer 1:
-#
-# Step 3, answer 2:
-#
 
+# Step 3, answer 1:
+# Parallel lists store card IDs and their tap counts in matching positions.
+# Each card ID has a corresponding count in the tap_counts list.
+
+
+# Step 3, answer 2:
+# Parallel lists require searching through the existing card IDs
+# to find a matching card. This increases the number of comparisons
+# as the number of distinct cards grows.
+
+# ===== Day 2 =====
 
 # Step 4: Count Taps Per Card With a Dictionary, and Stations With a Set
-# TODO: assign `taps_by_card` to an empty dict (card ID: tap count)
-# TODO: assign `lookups` to 0
-# TODO: loop over `taps`; add 1 to `lookups`
-# TODO: add 1 to row[1]'s count in `taps_by_card`, or set it to 1 if new
-# TODO: assign `stations` to set(); loop over `taps` and .add() row[2]
-# TODO: assign `repeat_riders` to 0
-# TODO: loop over `taps_by_card`; add 1 to `repeat_riders` if a count is > 1
+
+taps_by_card = {}
+lookups = 0
+
+for row in taps:
+    lookups += 1
+    card = row[1]
+
+    if card in taps_by_card:
+        taps_by_card[card] += 1
+    else:
+        taps_by_card[card] = 1
+
+stations = set()
+
+for row in taps:
+    stations.add(row[2])
+
+repeat_riders = 0
+
+for card in taps_by_card:
+    if taps_by_card[card] > 1:
+        repeat_riders += 1
+
 
 print("distinct cards:", len(taps_by_card))
 print("lookups the dictionary needed:", lookups)
@@ -88,47 +137,66 @@ print("unique stations:", len(stations), sorted(stations))
 print("cards that tapped more than once:", repeat_riders)
 print("taps for C001:", taps_by_card["C001"])
 
+
 # Step 4, answer 1:
-#
+# A dictionary stores card IDs as keys and tap counts as values.
+
+
 # Step 4, answer 2:
-#
+# A dictionary generally provides faster lookups than searching
+# through parallel lists because it uses keys to access values.
+
+
 # Step 4, answer 3:
-#
+# A set stores unique station names and automatically removes duplicates.
+
+
 # Step 4, answer 4:
-#
+# Repeat riders are cards that have tapped more than once.
+
 
 
 # ===== Day 3 =====
 
+
 # Step 5: Save the Summary as JSON and Read the TypeError a Set Causes
-# TODO: replace each None with your Day 2 value; keep `stations` a set
+
 summary = {
     "service_day": "2026-03-02",
-    "total_taps": None,
-    "distinct_cards": None,
-    "stations": None,
-    "taps_by_card": None,
+    "total_taps": len(taps),
+    "distinct_cards": len(taps_by_card),
+    "stations": stations,
+    "taps_by_card": taps_by_card,
 }
 
 print("about to serialize", len(summary), "keys")
-# TODO: run the file and answer below before you change anything
-# TODO: then put # in front of the next two lines so Step 6 can run
-text = json.dumps(summary, indent=2)
-print(text)
+
+# Run these two lines first to observe the TypeError:
+# text = json.dumps(summary, indent=2)
+# print(text)
+
 
 # Step 5, answer 1:
-#
+# The error occurred because Python sets are not supported by JSON serialization.
+# JSON supports lists and dictionaries, but not sets.
+
 # Step 5, answer 2:
-#
+# Convert the set into a list using sorted(stations) before saving it as JSON.
+
 # Step 5, answer 3:
-#
+# The TypeError occurred because the stations variable is a set.
+# Python requires the set to be converted into a JSON-supported data type.
 
 
 # Step 6: Write `tap_summary.json`, Reload It, and Check Which Types Survived
-# TODO: assign summary["stations"] to a type JSON can hold; keep the key
-# TODO: json.dump() `summary` into a with open("tap_summary.json", "w")
-# TODO: replace None with json.load() of "tap_summary.json"
-reloaded = None
+
+summary["stations"] = sorted(stations)
+
+with open("tap_summary.json", "w") as f:
+    json.dump(summary, f, indent=2)
+
+with open("tap_summary.json", "r") as f:
+    reloaded = json.load(f)
 
 print("total_taps came back as:", reloaded["total_taps"])
 print("taps_by_card came back as a", type(reloaded["taps_by_card"]).__name__)
@@ -136,7 +204,14 @@ print("C001 straight out of the file:", reloaded["taps_by_card"]["C001"])
 print("stations came back as a", type(reloaded["stations"]).__name__)
 print("round trip identical:", reloaded["taps_by_card"] == taps_by_card)
 
+
 # Step 6, answer 1:
-#
+# The JSON file saves the summary data using json.dump()
+# and loads it back into Python using json.load().
+
+
 # Step 6, answer 2:
-#
+# The dictionary comes back as a dictionary, but the stations
+# set comes back as a list because we converted it before saving.
+# The tap counts remain identical after reloading.
+
