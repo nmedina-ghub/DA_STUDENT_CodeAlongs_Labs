@@ -4,34 +4,38 @@
 # ===== 1. Lists Let You Change Anything, Anytime =====
 # Build a list of order IDs, add one, rename the first, and print the results.
 print('----- 1. Lists Let You Change Anything, Anytime -----')
-# TODO: create a list called pending_orders
-# TODO: put "ORD-1001", "ORD-1002" and "ORD-1003" in it
+
+pending_orders = ["ORD-1001", "ORD-1002" and "ORD-1003"]
 
 
-# TODO: append "ORD-1004" to pending_orders
+pending_orders.append("ORD-1004")
+
+pending_orders[0] = "ORD-1001-R"
 
 
-# TODO: change pending_orders[0] to "ORD-1001-R" (lists are mutable)
 
 
-# TODO: print pending_orders, its length, and its last item (use [-1])
+print("Here's the list of pending orders:", pending_orders)
+print("The count of pending orders:",len(pending_orders))
+print("This is last value in pending orders", pending_orders[-1])
 
 
 # ===== 2. Once Locked In, a Tuple Can't Be Changed =====
 # Store a log entry in a tuple, unpack it, then try to change it.
-# TODO: run it, read the TypeError, then comment out the raising line
+# Raising line: 13
 print("----- 2. Once Locked In, a Tuple Can't Be Changed -----")
-# TODO: create a tuple called log_entry: timestamp, level, status code
-# TODO: use any timestamp string, "ERROR" and 500
+
+log_entry = ("2026-10-28T10:32:002", "ERROR", 500)
 
 
-# TODO: unpack log_entry into timestamp, level, status
+timestamp, level, status = log_entry
 
 
-# TODO: print an f-string showing level, timestamp, and status
+print(f"{level} at {timestamp}: status {status}")
 
+log_entry = ["2024-01-15", "ERROR", "Failed to connect"]
 
-# TODO: try log_entry[0] = a new timestamp (this SHOULD raise an error)
+log_entry[0] = "2024-01-15t11:45:002"
 
 
 # ===== 3. Only Hashable Values Can Be Dict Keys =====
@@ -42,8 +46,9 @@ product_stock = {"SKU-1001": 92, "SKU-2002": 34}
 product_stock["SKU-3003"] = 8
 product_stock["SKU-1001"] = 89
 
-for sku, count in product_stock.____():
+for sku, count in product_stock.items():
     print(f"{sku}: {count}")
+    
 
 
 # ===== 4. Sets Make Membership Checks Instant =====
