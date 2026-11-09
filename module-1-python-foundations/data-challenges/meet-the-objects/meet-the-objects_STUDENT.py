@@ -13,8 +13,13 @@ with open(DATA_FILE) as f:
 
 # Step 1: Reproduce the Parallel-List Bug and Name the Wrong Stations
 # TODO: assign `names` and `bikes` to two empty lists
+names = []
+bikes = []
 # TODO: loop over `stations`; append each one's "name" to `names`
+for station in stations:
+    names.append(station["name"])
 # TODO: append the same station's "bikes_available" to `bikes`
+    bikes.append(station["bikes_available"])
 names.pop(2)
 
 print("stations in the file:", len(stations))
