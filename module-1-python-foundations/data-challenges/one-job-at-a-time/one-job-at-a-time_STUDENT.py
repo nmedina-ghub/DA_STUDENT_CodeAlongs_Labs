@@ -20,43 +20,54 @@ def read_donations(path):
 
 
 def validate_donation(record):
-    # TODO: add a one-sentence docstring naming its one job
-    # TODO: assign `parts` to `record` split on commas
-    # TODO: return False, "wrong field count" if `parts` lacks 5 fields
-    # TODO: return False, "missing category" if parts[2].strip() is ""
-    # TODO: in a try, call float(parts[3])
-    # TODO: in except ValueError, return False, "pounds is not a number"
-    # TODO: return True and ""
-    pass
+    """Validates a donation record for correct format and data."""
+    parts = record.split(",")
+    if len(parts) != 5:
+        return False, "wrong field count"
+    if parts[2].strip() == "":
+        return False, "missing category"
+    try:
+        float(parts[3])
+    except ValueError:
+        return False, "pounds is not a number"
+    return True, ""
 
-
-# TODO: assign `records` to read_donations(DATA_FILE), `valid` to []
-# TODO: loop over `records`; unpack validate_donation(record) as ok, reason
-# TODO: if `ok`, append `record` to `valid`
-# TODO: else print "rejected", the record's ID plus ":", and `reason`
+records = read_donations(DATA_FILE)
+valid = []
+for record in records:
+    ok, reason = validate_donation(record)
+    if ok:
+        valid.append(record)
+    else:
+        print("rejected", record.split(",")[0] + ":", reason)
 print(len(valid), "usable records out of", len(records))
 
-# Step 1, answer 1:
+# Step 1, answer 1: 17
 #
-# Step 1, answer 2:
+# Step 1, answer 2: 20
 #
 
 
 # Step 2: Write `summarize_donations()` for the Category Breakdown Only
 def summarize_donations(valid_records):
-    # TODO: add a one-sentence docstring naming its one job
-    # TODO: assign `by_category` to {} and `total_pounds` to 0.0
-    # TODO: loop over `valid_records`; split each record on commas into `parts`
-    # TODO: assign `category` to parts[2], `pounds` to float(parts[3])
-    # TODO: if `category` is not in `by_category`, add an entry for it
-    # TODO: start that entry as {"donations": 0, "pounds": 0.0}
-    # TODO: add 1 to its "donations" and `pounds` to its "pounds"
-    # TODO: add `pounds` to `total_pounds`
-    # TODO: return a dict of "records", "total_pounds" and "by_category"
-    pass
+    """Summarizes donation records by category."""
+    by_category = {}
+    total_pounds = 0.0
+    for record in valid_records:
+        parts = record.split(",")
+        category = parts[2]
+        pounds = float(parts[3])
+        if category not in by_category:
+            by_category[category] = {"donations": 0, "pounds": 0.0}
+        by_category[category]["donations"] += 1
+        by_category[category]["pounds"] += pounds
+        total_pounds += pounds
+    return {"records": len(valid_records), "total_pounds": total_pounds,
+            "by_category": by_category}
 
 
 # TODO: assign `summary` to summarize_donations(valid)
+summary = summarize_donations(valid)
 print("records:", summary["records"], "| total pounds:",
       summary["total_pounds"])
 for category, stats in summary["by_category"].items():
