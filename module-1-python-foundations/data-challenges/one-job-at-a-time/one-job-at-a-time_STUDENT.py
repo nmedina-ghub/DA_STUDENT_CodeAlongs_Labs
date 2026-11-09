@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """One Job at a Time: see DataChallengeOverview&Steps.md for the steps."""
 
+from importlib.resources import path
 import json
 
 DATA_FILE = "pantry_donations.csv"  # edit the filepath with the data
@@ -66,7 +67,6 @@ def summarize_donations(valid_records):
             "by_category": by_category}
 
 
-# TODO: assign `summary` to summarize_donations(valid)
 summary = summarize_donations(valid)
 print("records:", summary["records"], "| total pounds:",
       summary["total_pounds"])
@@ -74,26 +74,33 @@ for category, stats in summary["by_category"].items():
     print(category, stats["donations"], "donations,", stats["pounds"],
           "lbs")
 
-# Step 2, answer 1:
-#
+# Step 2, answer 1: This function goes through the valid donations and groups them by category.
+# It counts how many donations are in each category and adds up the pounds donated for each one.
 
 
 # ===== Day 2 =====
 
 # Step 3: Add `export_summary()` and `run_pipeline()`, Then Print Docstrings
 def export_summary(summary, path):
-    # TODO: add a one-sentence docstring naming its one job
-    # TODO: in a with open(path, "w") block, json.dump `summary`, indent=2
-    # TODO: return `path`
-    pass
 
+    """Exports the donation summary to a JSON file."""
+
+    with open(path, "w") as file:
+        json.dump(summary, file, indent=2)
+
+    return path
 
 def run_pipeline(in_path, out_path, summarize):
-    # TODO: add a one-sentence docstring naming its one job
-    # TODO: assign `kept` to [] and loop over read_donations(in_path)
-    # TODO: append each record that validate_donation() passes to `kept`
-    # TODO: return export_summary() of summarize(kept) and `out_path`
-    pass
+    
+    """Runs the donation processing pipeline."""
+
+    kept = []
+    for record in read_donations(in_path):
+       
+        if validate_donation(record)[0]:
+            kept.append(record)
+    
+    return export_summary(summarize(kept), out_path)
 
 
 written = run_pipeline(DATA_FILE, "donation_summary.json",
@@ -103,29 +110,47 @@ for func in [read_donations, validate_donation, summarize_donations,
              export_summary]:
     print(func.__name__ + ":", func.__doc__.splitlines()[0])
 
-# Step 3, answer 1:
+# Step 3, answer 1: This function saves the donation summary into a JSON file so the information can be stored and viewed later.
 #
-# Step 3, answer 2:
+# Step 3, answer 2: This function puts everything together by reading the donations, checking which ones are valid, summarizing them, and saving the results.
 #
 
 
 # Step 4: Swap In `summarize_by_day()` and Count the Functions You Edited
 def summarize_by_day(valid_records):
-    # TODO: add a one-sentence docstring naming its one job
-    # TODO: return the same dict shape, with "by_day" keyed by parts[4]
-    pass
+    """Summarizes donations by day."""
+    by_day = {}
+    total_pounds = 0.0
 
+    for record in valid_records:
+        parts = record.split(",")
+        day = parts[4]
+        pounds = float(parts[3])
 
-# TODO: call run_pipeline(DATA_FILE, "donation_summary.json", summarize_by_day)
-# TODO: replace None with json.load() of "donation_summary.json"
-reloaded = None
+        if day not in by_day:
+            by_day[day] = {"donations": 0, "pounds": 0.0}
+
+        by_day[day]["donations"] += 1
+        by_day[day]["pounds"] += pounds
+        total_pounds += pounds
+
+    return {
+        "records": len(valid_records),
+        "total_pounds": total_pounds,
+        "by_day": by_day
+    }
+
+run_pipeline(DATA_FILE, "donation_summary.json", summarize_by_day)
+
+reloaded = json.load(open("donation_summary.json"))
 
 print("records:", reloaded["records"], "| total pounds:",
       reloaded["total_pounds"])
 for day, stats in sorted(reloaded["by_day"].items()):
     print(day, stats["donations"], "donations,", stats["pounds"], "lbs")
 
-# Step 4, answer 1:
+# Step 4, answer 1: I changed the summary function to group donations by date instead of grouping them by category.
+
 #
-# Step 4, answer 2:
+# Step 4, answer 2: I reused the pipeline to save the daily summary as a JSON file and then loaded the file back to display the results.
 #
