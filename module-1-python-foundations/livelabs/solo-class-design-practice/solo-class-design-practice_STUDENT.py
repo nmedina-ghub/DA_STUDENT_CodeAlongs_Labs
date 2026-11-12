@@ -32,15 +32,18 @@ SUBMIT
 # A new stakeholder need. Not the board-game or office-supply domain from
 # lecture, and not one of the project's own 4 scenarios.
 
-# Your answer:
+# Your answer: What the tool is. 
+# How many are free to borrow right now.
+# Whether it needs a safety check before it goes out again. Power tools need a quick inspection after every use. Most other tools do not.
 #
 #
 
 # ===== Step 2: Decide Your Attributes, Each With a Reason From the Scenario =====
 
-# Your answer:
-#
-#
+# Your answer: ID_number: to identify the tool in the library
+# Name: to identify the tool in the library
+# Quantity_available: to know how many are free to borrow right now
+# Needs_safety_check: to know if the tool needs a safety check before it goes out again
 
 # ===== Step 3: Write __init__ and a Method, From Scratch =====
 # There is no single correct design here. Your class name, your attribute
@@ -48,18 +51,54 @@ SUBMIT
 # right. The test is whether each one traces back to the stakeholder
 # paragraph.
 
-# TODO: Write __init__ and a Method, From Scratch
+import json
+
+with open("tools_list.json", "r") as file:
+    data = json.load(file)
+
+class tool_tracker:
+
+    def __init__(self, ID_number: int, name: str, quantity_available: int, needs_safety_check: bool):
+        self.ID_number = ID_number
+        self.name = name
+        self.quantity_available = quantity_available
+        self.needs_safety_check = needs_safety_check
+
+    def needs_inspection(self):
+        return self.needs_safety_check
+
+tool_library = []
+
+for item in data:
+    tool_library.append(
+        tool_tracker(
+            item["ID_number"],
+            item["name"],
+            item["quantity_available"],
+            item["needs_safety_check"]
+        )
+    )
 
 # ===== Step 4: Instantiate 2+ Objects, Confirm Independent Storage =====
 # The same proof Day 13's lecture asked for, now on a class you designed
 # yourself. Predict what each print() will show before you run it.
 
-# TODO: Instantiate 2+ Objects, Confirm Independent Storage
+tool1 = tool_tracker(1, "Cordless Drill", 3, True)
+tool2 = tool_tracker(2, "Step Ladder", 5, False)
+
+print(tool1.needs_inspection())
+print(tool2.needs_inspection())
+
+tool1.quantity_available = 2
+
+print(tool1.needs_inspection())
+print(tool2.needs_inspection())
+
 
 # ===== Step 5: Justify Your Design Choice in 2-3 Sentences =====
 
-# Your answer:
-#
+# Your answer: I chose these attributes because the operations manager needs to know each turbine's name, location, energy production, and operating status.
+# I created needs_maintenance() to help identify turbines that may need attention if their energy output is too low or they are not operating.
 #
 
 # ----- Share Out -----

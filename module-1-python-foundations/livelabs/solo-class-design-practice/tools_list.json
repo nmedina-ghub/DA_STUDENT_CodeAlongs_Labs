@@ -1,0 +1,50 @@
+[
+  {
+    "ID_number": 1,
+    "name": "Cordless Drill",
+    "quantity_available": 3,
+    "needs_safety_check": true
+  },
+  {
+    "ID_number": 2,
+    "name": "Step Ladder",
+    "quantity_available": 5,
+    "needs_safety_check": false
+  },
+  {
+    "ID_number": 3,
+    "name": "Pressure Washer",
+    "quantity_available": 2,
+    "needs_safety_check": true
+  },
+  {
+    "ID_number": 4,
+    "name": "Extension Ladder",
+    "quantity_available": 4,
+    "needs_safety_check": false
+  },
+  {
+    "ID_number": 5,
+    "name": "Circular Saw",
+    "quantity_available": 1,
+    "needs_safety_check": true
+  },
+  {
+    "ID_number": 6,
+    "name": "Wheelbarrow",
+    "quantity_available": 3,
+    "needs_safety_check": false
+  },
+  {
+    "ID_number": 7,
+    "name": "Electric Sander",
+    "quantity_available": 2,
+    "needs_safety_check": true
+  },
+  {
+    "ID_number": 8,
+    "name": "Garden Shovel",
+    "quantity_available": 6,
+    "needs_safety_check": false
+  }
+]
