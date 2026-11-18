@@ -36,7 +36,7 @@ class BoardGame:
 
     def is_available(self):
         return self.players_available >= 0
-
+# Logic Error line 38
 
 # ===== 2. The Script, Part 2: The Data =====
 # This code builds a list of four BoardGame objects for the script to count.
@@ -48,7 +48,8 @@ games = [
     BoardGame("Chess", 2, "strategy"),
     BoardGame("Sorry!", 4, "Strategy"),
 ]
-
+# Syntax Error line 48
+# Logic Error line 46-49 
 
 # ===== 3. The Script, Part 3: Counting Strategy Games =====
 # This loop is meant to count how many games are in the Strategy category, then
@@ -63,7 +64,7 @@ for i in range(len(games) - 1):
 print("--- Summary ---")
 print("Category: Strategy")
 print("Count:", strategy_count)
-
+# Logic Error line 60
 
 # ===== 4. The Script, Part 4: Counting Available Games =====
 # This loop is meant to count how many games have at least one open player
@@ -78,11 +79,12 @@ for game in games:
 print("--- Summary ---")
 print("Category: Available")
 print("Count:", available_count)
+# Logic Error line 38
 
 # DISCUSS: Would you trust the script in sections 1-4 if it ran clean? Pick yes
 #          or no, then answer: what made it look trustworthy, or what would you
 #          verify before trusting it?
-# Your answer:
+# Your answer: No, I would not trust the script because there are logic errors in the code that could lead to incorrect results. For example, the loop in section 3 does not include the last game in the list due to the range being set to len(games) - 1, which could cause an undercount of strategy games. Additionally, the is_available method in section 1 has a logic error that could lead to incorrect availability checks. Before trusting the script, I would verify that all loops and conditions are correctly implemented and that the methods return expected results.
 #
 #
 
