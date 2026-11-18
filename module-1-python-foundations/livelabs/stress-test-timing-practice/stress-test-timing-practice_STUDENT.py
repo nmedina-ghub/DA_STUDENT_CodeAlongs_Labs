@@ -35,21 +35,26 @@ SUBMIT
 import random  # Python's built-in module for random values
 
 # TODO: paste your class here (or the sample LibraryTool from the slides)
+class LibraryTool:
+    def __init__(self, tool_name, quantity_available, requires_inspection):
+        self.tool_name = tool_name
+        self.quantity_available = quantity_available
+        self.requires_inspection = requires_inspection
 
+    def is_available(self):
+        return self.quantity_available > 0
 
 def make_batch(size):
-    # TODO: make an empty list called batch
-    # TODO: loop `size` times with: for i in range(size):
-    # TODO: inside the loop, create one object and append it to batch
-    # TODO: give each object a unique name, e.g. f"Tool{i}"
-    # TODO: use random.randint(0, 5) for any number attribute
-    # TODO: after the loop, return batch
-    pass
+    tools = []
+    for i in range(size):
+        tools.append(LibraryTool(f"Tool{i}", random.randint(0, 5), random.choice([True, False])))
+    return tools
 
+small_batch = make_batch(10)
+medium_batch = make_batch(1000)
+large_batch = make_batch(100000)
+print(len(small_batch), len(medium_batch), len(large_batch))
 
-# TODO: small_batch = make_batch(10)
-# TODO: make medium_batch (1,000) and large_batch (100,000) the same way
-# TODO: print len() of all three batches to check their sizes
 
 # ===== Step 2: Write Two Searches Over That Batch - a Linear Scan and a Dict Lookup - and Confirm They Agree =====
 # Same two functions Day 16's lecture wrote over SupplyItem - now over your
@@ -57,21 +62,29 @@ def make_batch(size):
 
 def find_by_name_linear(batch, name):
     # TODO: loop over batch, one object at a time
-    # TODO: if the object's name equals name, return the object
+    for obj in batch:
+        # TODO: if the object's name equals name, return the object
+        if obj.tool_name == name:
+            return obj
     # TODO: after the loop, return None (nothing matched)
-    pass
+    return None
 
 
 def build_lookup(batch):
     # TODO: return a dict: {obj.name: obj for obj in batch}
+
     # TODO: (use your class's real name attribute, e.g. tool_name)
-    pass
+    return {obj.tool_name: obj for obj in batch}
 
 
 # TODO: lookup = build_lookup(large_batch)
+
 # TODO: pick a name you know is in large_batch, like "Tool99999"
+
 # TODO: print what find_by_name_linear returns for that name
+
 # TODO: print what lookup.get() returns for the same name
+
 # TODO: check both printed lines show the same object
 
 # ===== Step 3: Put a Stopwatch on Both Searches at All Three Sizes and Record the Numbers =====
@@ -81,9 +94,10 @@ def build_lookup(batch):
 import time  # Python's built-in module; time.perf_counter() is new
 
 # TODO: predict first: which time grows with size? Write it here:
-# Prediction:
+# Prediction: linear_time
 
 # TODO: make a list of (size, batch) pairs for your three batches
+size_batch_pairs = [(10, small_batch), (1000, medium_batch), (100000, large_batch)]
 # TODO: loop over that list: for size, batch in pairs:
 # TODO:   lookup = build_lookup(batch)
 # TODO:   start = time.perf_counter()
@@ -91,6 +105,7 @@ import time  # Python's built-in module; time.perf_counter() is new
 # TODO:   linear_time = time.perf_counter() - start
 # TODO:   time lookup.get("NotThere") the same way, as dict_time
 # TODO:   print(size, linear_time, dict_time)
+print("Size\tLinear Time\tDict Time")
 # TODO: search for "NotThere" on purpose: a missing name is the worst case
 # TODO: 1.5e-06 in your output means 0.0000015 seconds
 

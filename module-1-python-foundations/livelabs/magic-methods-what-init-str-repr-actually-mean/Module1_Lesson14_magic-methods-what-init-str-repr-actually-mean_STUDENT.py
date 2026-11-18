@@ -61,6 +61,7 @@ print('----- 2. Step 1: Add __str__ -----')
 # a coder track down bugs.
 print('----- 3. Step 2: Add __repr__ Too -----')
 # TODO: keep __init__ and __str__ from Step 1
+
 # TODO: add __repr__(self) that returns f"BoardGame('{self.title}')"
 
 
