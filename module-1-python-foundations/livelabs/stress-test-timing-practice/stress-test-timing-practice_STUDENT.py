@@ -34,7 +34,6 @@ SUBMIT
 
 import random  # Python's built-in module for random values
 
-# TODO: paste your class here (or the sample LibraryTool from the slides)
 class LibraryTool:
     def __init__(self, tool_name, quantity_available, requires_inspection):
         self.tool_name = tool_name
@@ -61,31 +60,25 @@ print(len(small_batch), len(medium_batch), len(large_batch))
 # own class and a much bigger batch.
 
 def find_by_name_linear(batch, name):
-    # TODO: loop over batch, one object at a time
+
     for obj in batch:
-        # TODO: if the object's name equals name, return the object
         if obj.tool_name == name:
             return obj
-    # TODO: after the loop, return None (nothing matched)
     return None
 
 
 def build_lookup(batch):
-    # TODO: return a dict: {obj.name: obj for obj in batch}
-
-    # TODO: (use your class's real name attribute, e.g. tool_name)
     return {obj.tool_name: obj for obj in batch}
 
 
-# TODO: lookup = build_lookup(large_batch)
+lookup = build_lookup(large_batch)
 
-# TODO: pick a name you know is in large_batch, like "Tool99999"
+name = "Tool99999"
 
-# TODO: print what find_by_name_linear returns for that name
+print(find_by_name_linear(large_batch, name))
 
-# TODO: print what lookup.get() returns for the same name
+print(lookup.get(name))
 
-# TODO: check both printed lines show the same object
 
 # ===== Step 3: Put a Stopwatch on Both Searches at All Three Sizes and Record the Numbers =====
 # Predict the pattern before running: which column should grow as size
@@ -93,25 +86,28 @@ def build_lookup(batch):
 
 import time  # Python's built-in module; time.perf_counter() is new
 
-# TODO: predict first: which time grows with size? Write it here:
 # Prediction: linear_time
 
-# TODO: make a list of (size, batch) pairs for your three batches
 size_batch_pairs = [(10, small_batch), (1000, medium_batch), (100000, large_batch)]
-# TODO: loop over that list: for size, batch in pairs:
-# TODO:   lookup = build_lookup(batch)
-# TODO:   start = time.perf_counter()
-# TODO:   run find_by_name_linear(batch, "NotThere")
-# TODO:   linear_time = time.perf_counter() - start
-# TODO:   time lookup.get("NotThere") the same way, as dict_time
-# TODO:   print(size, linear_time, dict_time)
+
 print("Size\tLinear Time\tDict Time")
-# TODO: search for "NotThere" on purpose: a missing name is the worst case
-# TODO: 1.5e-06 in your output means 0.0000015 seconds
+
+for size, batch in size_batch_pairs:
+    lookup = build_lookup(batch)
+
+    start = time.perf_counter()
+    find_by_name_linear(batch, "NotThere")
+    linear_time = time.perf_counter() - start
+
+    start = time.perf_counter()
+    lookup.get("NotThere")
+    dict_time = time.perf_counter() - start
+
+    print(size, linear_time, dict_time)
 
 # ===== Step 4: Answer Your Manager's Question in One Sentence, in Big-O Terms =====
 
-# Your answer:
+# Your answer: Linear search is O(n) because it takes longer as the number of tools increases, while dictionary lookup is O(1) because its search time stays roughly constant.
 #
 #
 
@@ -146,6 +142,6 @@ print("Size\tLinear Time\tDict Time")
 #
 # Be ready to answer "why did you do it that way?"
 
-# Your notes for the share out:
+# Your notes for the share out: I created three different batch sizes to test how search performance changes as the amount of data increases. Linear search gets slower because it checks items one at a time, while dictionary lookup uses a key to find an item much faster.
 #
 #
