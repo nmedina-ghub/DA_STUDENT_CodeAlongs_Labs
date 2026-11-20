@@ -4,20 +4,32 @@
 # ===== 1. A Tool Class =====
 # Write a Tool class with a name, a count, and is_low().
 print('----- 1. A Tool Class -----')
-# TODO: define a Tool class with a one-line docstring
-# TODO: __init__(self, name, count) stores both as attributes
-# TODO: is_low(self) returns True when count is 1 or less
-# TODO: __repr__(self) returns Tool('drill', 1) style text
+
+class Tool:
+    """A class representing a tool with a name and count."""
+    def __init__(self, name, count):
+        self.name = name
+        self.count = count
+
+    def is_low(self):
+        return self.count < 2
+
+    def __repr__(self):
+        return f"Tool(name={self.name}, count={self.count})"
 
 
-# TODO: make drill = Tool("drill", 1) and saw = Tool("saw", 4)
-# TODO: print drill, then drill.is_low() and saw.is_low()
+drill = Tool("drill", 1)
+saw = Tool("saw", 4)
+
+print(drill)
+print(drill.is_low())
+print(saw.is_low())
 
 # PREDICT before you run: With no __str__, what does print(drill) show?
-# Your answer:
+# Your answer: drill = true
 #
 # DISCUSS: Why a class, not three parallel lists?
-# Your answer:
+# Your answer: a class because we are performing the same actions on the same data, and it is easier to manage and maintain the code with a class.
 #
 
 
@@ -26,10 +38,26 @@ print('----- 1. A Tool Class -----')
 print('----- 2. Check One Line -----')
 FIELDS = {"ADD": 3, "LEND": 2}
 
+def check_line(line):
+    """Check if a line is valid and return why or None."""
 
-# TODO: define check_line(line) with a one-line docstring
-# TODO: split the stripped line on commas; uppercase the command
-# TODO: unknown command? print why and return None
+    fields = line.strip().split(",")
+    command = fields[0].upper()
+
+    if command not in FIELDS:
+        print(f"Unknown command: {fields[0]}")
+        return None
+    if len(fields) != FIELDS[command]:
+        print(f"Skipped: {command}: needs {FIELDS[command]} fields")   
+    fields[0] = command
+    if command == "ADD":
+          try:
+                fields[2] = int(fields[2])
+          except ValueError:
+              print(f"Skipped: count {fields[2]} is not an integer")
+              return None
+          return fields
+    
 # TODO: wrong field count for that command? print why, return None
 # TODO: for ADD, convert the count with int() inside try/except
 # TODO: return the fields list when every check passes
